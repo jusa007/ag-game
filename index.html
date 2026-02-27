@@ -3,16 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Agileday Game Changer — Ops Rusher</title>
+  <title>Agileday Game Changer — Ops Rush</title>
   <style>
-    /* =========================================================
-      THEME SYSTEM
-      - Default theme = TRAD (boring/desaturated)
-      - When Agileday is enabled, we add body.theme-agi
-    ========================================================= */
-
     :root{
-      /* Base tokens (will be overwritten by theme classes) */
       --bg: #0b1220;
       --panel:#0f1b33;
       --panel2:#0c1730;
@@ -29,16 +22,13 @@
       --radius: 16px;
       --radius2: 20px;
 
-      /* “Lights” */
       --glow: 0 0 0 rgba(0,0,0,0);
       --shine: rgba(255,255,255,.00);
-      --bgShift: 0px;
 
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     }
 
-    /* TRAD THEME (boring) */
     body.theme-trad{
       --bg:#0a0f19;
       --panel:#0c1322;
@@ -46,10 +36,10 @@
       --text:#e6ebf7;
       --muted:#9aa6c6;
 
-      --accent:#8a97b6;  /* muted */
-      --good:#7a8aa0;    /* intentionally dull */
-      --warn:#c2b79e;    /* dull */
-      --bad:#c4a0a7;     /* dull */
+      --accent:#8a97b6;
+      --good:#7a8aa0;
+      --warn:#c2b79e;
+      --bad:#c4a0a7;
 
       --stroke: rgba(255,255,255,.08);
       --shadow: 0 10px 32px rgba(0,0,0,.45);
@@ -58,7 +48,6 @@
       --shine: rgba(255,255,255,.00);
     }
 
-    /* AGI THEME (“lights on”, vivid) */
     body.theme-agi{
       --bg:#071022;
       --panel:#0c1a3a;
@@ -66,7 +55,7 @@
       --text:#eef3ff;
       --muted:#b5c3e6;
 
-      --accent:#7aa2ff;  /* vivid */
+      --accent:#7aa2ff;
       --good:#30d18b;
       --warn:#ffcc66;
       --bad:#ff5c7a;
@@ -90,7 +79,6 @@
       justify-content:center;
       padding:18px;
 
-      /* Background (will feel dull in TRAD, vibrant in AGI due to vars) */
       background:
         radial-gradient(1200px 600px at 20% 0%, rgba(122,162,255,.14), transparent 60%),
         radial-gradient(900px 500px at 80% 10%, rgba(48,209,139,.08), transparent 60%),
@@ -101,7 +89,6 @@
       overflow-x:hidden;
     }
 
-    /* Subtle animated glow layer for AGI theme */
     body::before{
       content:"";
       position:fixed;
@@ -113,7 +100,6 @@
         radial-gradient(640px 420px at 85% 30%, rgba(48,209,139,.16), transparent 65%),
         radial-gradient(760px 520px at 55% 90%, rgba(255,204,102,.12), transparent 70%);
       filter: blur(2px);
-      transform: translateY(var(--bgShift));
       transition: opacity .6s ease;
       animation: floatGlow 6s ease-in-out infinite;
       z-index:0;
@@ -126,7 +112,6 @@
       100%{ transform: translateY(0px); }
     }
 
-    /* Tiny “lights” dots only for AGI (very subtle) */
     body::after{
       content:"";
       position:fixed;
@@ -246,7 +231,7 @@
 
     .hud{
       display:grid;
-      grid-template-columns: 1.2fr 1fr 1fr;
+      grid-template-columns: 1.05fr 1fr 1fr;
       gap:12px;
     }
     .hud .box{
@@ -259,7 +244,6 @@
       justify-content:space-between;
       gap:10px;
     }
-
     .label{color:var(--muted); font-size:12px;}
     .value{font-family:var(--mono); font-weight:800;}
 
@@ -282,6 +266,20 @@
       filter: saturate(.9);
     }
     body.theme-trad .bar > i{ filter: saturate(.55); }
+
+    .hudStack{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      width:100%;
+    }
+    .hudRow{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      width:100%;
+    }
 
     .main{
       display:grid;
@@ -514,7 +512,9 @@
       padding:18px;
     }
     body.theme-agi .modal{
-      box-shadow: 0 30px 90px rgba(0,0,0,.55), 0 0 0 1px rgba(122,162,255,.14), 0 0 40px rgba(122,162,255,.14);
+      box-shadow: 0 30px 90px rgba(0,0,0,.55),
+                  0 0 0 1px rgba(122,162,255,.14),
+                  0 0 40px rgba(122,162,255,.14);
     }
 
     .modalTop{
@@ -535,6 +535,7 @@
       font-size:13px;
       white-space:pre-line;
     }
+
     .modal .grid{
       margin-top:14px;
       display:grid;
@@ -561,7 +562,43 @@
       gap:10px;
       flex-wrap:wrap;
       justify-content:flex-end;
+      align-items:center;
     }
+
+    .ctaBig{
+      padding:14px 18px !important;
+      border-radius: 18px !important;
+      font-size: 14px !important;
+      letter-spacing:.3px !important;
+      width: min(340px, 100%);
+      background: rgba(48,209,139,.24) !important;
+      border-color: rgba(48,209,139,.55) !important;
+      box-shadow: 0 0 0 1px rgba(48,209,139,.14), 0 16px 50px rgba(48,209,139,.18);
+      position:relative;
+    }
+    .ctaBig:hover{
+      background: rgba(48,209,139,.32) !important;
+      box-shadow: 0 0 0 1px rgba(48,209,139,.18), 0 22px 70px rgba(48,209,139,.22);
+    }
+
+    /* ROI-ish highlight line */
+    .roiPill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(48,209,139,.45);
+      background: rgba(48,209,139,.10);
+      color: rgba(233,238,252,.98);
+      font-weight:900;
+      font-family: var(--mono);
+      font-size:12px;
+      box-shadow: 0 0 0 1px rgba(48,209,139,.10), 0 14px 40px rgba(48,209,139,.12);
+    }
+    .roiPill b{ color: var(--good); }
+    .roiPill .muted{ color: var(--muted); font-weight:800; }
+    .roiWrap{ margin-top:12px; }
 
     .kbd{
       font-family: var(--mono);
@@ -580,6 +617,8 @@
       .pane{min-height: unset;}
       .bar{max-width: 60%;}
       .modal .grid{grid-template-columns: 1fr;}
+      .modalActions{justify-content:stretch;}
+      .ctaBig{width:100%;}
     }
   </style>
 </head>
@@ -604,45 +643,77 @@
 
     <div class="hud">
       <div class="card box">
-        <div>
-          <div class="label">TIME LEFT</div>
-          <div class="value" id="timeLeft">01:00</div>
-        </div>
-        <div style="display:flex; align-items:center; gap:10px;">
-          <div class="label">WAVE</div>
-          <div class="value" id="wave">0</div>
-        </div>
-      </div>
-
-      <div class="card box">
-        <div>
-          <div class="label">SCORE</div>
-          <div class="value" id="score">0</div>
-        </div>
-        <div style="display:flex; align-items:center; gap:10px;">
-          <div class="label">DONE</div>
-          <div class="value" id="done">0</div>
-        </div>
-      </div>
-
-      <div class="card box">
-        <div>
-          <div class="label">CHAOS (context switching + missed updates)</div>
-          <div style="display:flex; align-items:center; gap:10px; margin-top:6px;">
-            <div class="bar"><i id="chaosBar"></i></div>
-            <div class="value" id="chaosVal">0%</div>
+        <div class="hudStack">
+          <div class="hudRow">
+            <div>
+              <div class="label">TIME LEFT</div>
+              <div class="value" id="timeLeft">01:00</div>
+            </div>
+            <div style="text-align:right">
+              <div class="label">WAVE</div>
+              <div class="value" id="wave">0</div>
+            </div>
+          </div>
+          <div class="hudRow">
+            <div class="label">Tip: Switch on Agileday at <b>00:35</b></div>
+            <div class="label"><span class="kbd">A</span> switches when unlocked</div>
           </div>
         </div>
-        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
-          <!-- Start visually locked -->
-          <button class="secondary" id="switchBtn" title="Unlocks mid-game">Switch on Agileday</button>
-          <span class="label" id="switchHint">Unlocks at 01:10</span>
+      </div>
+
+      <div class="card box">
+        <div class="hudStack">
+          <div class="hudRow">
+            <div>
+              <div class="label">TRAD SCORE</div>
+              <div class="value" id="scoreTrad">0</div>
+            </div>
+            <div style="text-align:right">
+              <div class="label">TRAD DONE</div>
+              <div class="value" id="doneTrad">0</div>
+            </div>
+          </div>
+          <div>
+            <div class="label">TRAD CHAOS</div>
+            <div style="display:flex; align-items:center; gap:10px; margin-top:6px;">
+              <div class="bar"><i id="chaosBarTrad"></i></div>
+              <div class="value" id="chaosValTrad">0%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card box">
+        <div class="hudStack">
+          <div class="hudRow">
+            <div>
+              <div class="label">AGI SCORE</div>
+              <div class="value" id="scoreAgi">0</div>
+            </div>
+            <div style="text-align:right">
+              <div class="label">AGI DONE</div>
+              <div class="value" id="doneAgi">0</div>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:10px;">
+            <div style="flex:1;">
+              <div class="label">AGI CHAOS</div>
+              <div style="display:flex; align-items:center; gap:10px; margin-top:6px;">
+                <div class="bar"><i id="chaosBarAgi"></i></div>
+                <div class="value" id="chaosValAgi">0%</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
+              <button class="secondary" id="switchBtn" title="Unlocks mid-game">Switch on Agileday</button>
+              <span class="label" id="switchHint">Unlocks at 00:35</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="main">
-      <!-- Traditional -->
       <div class="card pane" id="traditionalPane">
         <div class="paneHeader">
           <div>
@@ -674,7 +745,6 @@
         </div>
       </div>
 
-      <!-- Agileday -->
       <div class="card pane" id="agiledayPane" style="opacity:.85;">
         <div class="paneHeader">
           <div>
@@ -705,13 +775,15 @@
     </div>
   </div>
 
-  <!-- Overlays -->
   <div class="overlay" id="overlay">
     <div class="modal">
       <div class="modalTop">
         <div>
           <h2 id="modalTitle">How to play</h2>
+
+          <!-- ✅ We keep p for text, and add a dedicated ROI area below -->
           <p id="modalText"></p>
+          <div class="roiWrap" id="roiWrap" style="display:none;"></div>
         </div>
         <button class="secondary" id="closeModal">Close</button>
       </div>
@@ -744,7 +816,6 @@
 
 <script>
 (() => {
-  // ---------- Game data ----------
   const TASK_TYPES = [
     { key:"OPP", name:"New sales opportunity needs skills + refs", tool:"CRM", basePts: 60, flavor:"Bring best people into pre-sales." },
     { key:"OPEN", name:"Project opening: match availability + motivation", tool:"HR", basePts: 70, flavor:"Find right fit fast." },
@@ -754,33 +825,51 @@
     { key:"SLACK", name:"Stakeholder wants status update now", tool:"CHAT", basePts: 50, flavor:"Keep everyone aligned." }
   ];
 
+  // ✅ Single source of truth: 1-minute game
+  const GAME_SECONDS = 60;
+
   const state = {
     running:false,
-    paused:false,         // ✅ new: pause timer when a modal is open
-    mode:"TRAD",          // TRAD | AGI
+    paused:false,
+
     selectedTool:null,
-    timeLeft:120,
-    score:0,
-    done:0,
+    timeLeft: GAME_SECONDS,
     wave:0,
-    chaos:0,              // 0..100
+
+    scoreTrad:0,
+    doneTrad:0,
+    chaosTrad:0,
+
+    scoreAgi:0,
+    doneAgi:0,
+    chaosAgi:0,
+
     switchUnlocked:false,
     agiEnabled:false,
+
     tickHandle:null,
     spawnHandle:null,
+
     lastTool:null,
     queues: { trad:[], agi:[] },
     idSeq: 1,
   };
 
-  // ---------- DOM ----------
   const $ = (id) => document.getElementById(id);
+
   const timeLeftEl = $("timeLeft");
-  const scoreEl = $("score");
-  const doneEl = $("done");
   const waveEl = $("wave");
-  const chaosBar = $("chaosBar");
-  const chaosVal = $("chaosVal");
+
+  const scoreTradEl = $("scoreTrad");
+  const doneTradEl  = $("doneTrad");
+  const chaosBarTrad = $("chaosBarTrad");
+  const chaosValTrad = $("chaosValTrad");
+
+  const scoreAgiEl = $("scoreAgi");
+  const doneAgiEl  = $("doneAgi");
+  const chaosBarAgi = $("chaosBarAgi");
+  const chaosValAgi = $("chaosValAgi");
+
   const modeBadge = $("modeBadge");
 
   const startBtn = $("startBtn");
@@ -799,15 +888,14 @@
   const overlay = $("overlay");
   const modalTitle = $("modalTitle");
   const modalText = $("modalText");
+  const roiWrap = $("roiWrap");
   const closeModal = $("closeModal");
   const modalPrimary = $("modalPrimary");
   const modalSecondary = $("modalSecondary");
   const modalGrid = $("modalGrid");
 
-  // Tools buttons
   const toolEls = Array.from(document.querySelectorAll(".tool"));
 
-  // ---------- Helpers ----------
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
   const fmtTime = (sec) => {
     const m = Math.floor(sec/60);
@@ -815,8 +903,9 @@
     return String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
   };
 
-  function setChaos(delta){
-    state.chaos = clamp(state.chaos + delta, 0, 100);
+  function setTheme(){
+    document.body.classList.toggle("theme-agi", state.agiEnabled);
+    document.body.classList.toggle("theme-trad", !state.agiEnabled);
   }
 
   function setSelectedTool(tool){
@@ -828,24 +917,65 @@
     return state.switchUnlocked && state.running && !state.agiEnabled;
   }
 
-  function setTheme(){
-    // ✅ Theme swap
-    document.body.classList.toggle("theme-agi", state.agiEnabled);
-    document.body.classList.toggle("theme-trad", !state.agiEnabled);
+  function showModal(title, text, primaryLabel="Start", secondaryLabel="OK", onPrimary=null, onSecondary=null, gridMode=true, primaryBig=false, roiHtml=null){
+    if(state.running) state.paused = true;
+
+    modalTitle.textContent = title;
+    modalText.textContent = text;
+    modalPrimary.textContent = primaryLabel;
+    modalSecondary.textContent = secondaryLabel;
+
+    modalGrid.style.display = gridMode ? "" : "none";
+
+    modalPrimary.classList.toggle("ctaBig", !!primaryBig);
+
+    if(roiHtml){
+      roiWrap.style.display = "";
+      roiWrap.innerHTML = roiHtml;
+    }else{
+      roiWrap.style.display = "none";
+      roiWrap.innerHTML = "";
+    }
+
+    modalPrimary.onclick = () => {
+      overlay.style.display="none";
+      state.paused = false;
+      onPrimary && onPrimary();
+    };
+    modalSecondary.onclick = () => {
+      overlay.style.display="none";
+      state.paused = false;
+      onSecondary && onSecondary();
+    };
+
+    overlay.style.display="flex";
+  }
+
+  function closeAnyModal(){
+    if(overlay.style.display === "flex"){
+      overlay.style.display = "none";
+      state.paused = false;
+    }
   }
 
   function updateHUD(){
     timeLeftEl.textContent = fmtTime(state.timeLeft);
-    scoreEl.textContent = state.score;
-    doneEl.textContent = state.done;
     waveEl.textContent = state.wave;
-    chaosBar.style.width = state.chaos + "%";
-    chaosVal.textContent = Math.round(state.chaos) + "%";
+
+    scoreTradEl.textContent = state.scoreTrad;
+    doneTradEl.textContent = state.doneTrad;
+    chaosBarTrad.style.width = clamp(state.chaosTrad,0,100) + "%";
+    chaosValTrad.textContent = Math.round(clamp(state.chaosTrad,0,100)) + "%";
+
+    scoreAgiEl.textContent = state.scoreAgi;
+    doneAgiEl.textContent = state.doneAgi;
+    chaosBarAgi.style.width = clamp(state.chaosAgi,0,100) + "%";
+    chaosValAgi.textContent = Math.round(clamp(state.chaosAgi,0,100)) + "%";
 
     modeBadge.textContent = "MODE: " + (state.agiEnabled ? "AGILEDAY FLOW" : "TRADITIONAL");
 
-    // Unlock at 01:10 (70 seconds left)
-    if(state.running && !state.switchUnlocked && state.timeLeft <= 70){
+    // ✅ Unlock at 00:35 (35 seconds left)
+    if(state.running && !state.switchUnlocked && state.timeLeft <= 35){
       state.switchUnlocked = true;
       switchHint.textContent = "Unlocked!";
       switchBtn.classList.add("good");
@@ -854,13 +984,12 @@
 
     if(!state.running){
       switchBtn.disabled = true;
-      switchHint.textContent = "Unlocks at 01:10";
-      // ensure looks locked
+      switchHint.textContent = "Unlocks at 00:35";
       switchBtn.classList.add("secondary");
       switchBtn.classList.remove("good");
     }else{
       switchBtn.disabled = !canSwitchNow();
-      if(!state.switchUnlocked) switchHint.textContent = "Unlocks at 01:10";
+      if(!state.switchUnlocked) switchHint.textContent = "Unlocks at 00:35";
       if(state.agiEnabled){
         switchHint.textContent = "Agileday is ON";
         switchBtn.classList.add("good");
@@ -875,32 +1004,10 @@
     setTheme();
   }
 
-  function showModal(title, text, primaryLabel="Start", secondaryLabel="OK", onPrimary=null, onSecondary=null, gridMode=true){
-    // ✅ pause game while modal is open
-    if(state.running) state.paused = true;
-
-    modalTitle.textContent = title;
-    modalText.textContent = text;
-    modalPrimary.textContent = primaryLabel;
-    modalSecondary.textContent = secondaryLabel;
-
-    // show/hide the comparison grid (for special popups we can hide it)
-    modalGrid.style.display = gridMode ? "" : "none";
-
-    modalPrimary.onclick = () => { overlay.style.display="none"; state.paused = false; onPrimary && onPrimary(); };
-    modalSecondary.onclick = () => { overlay.style.display="none"; state.paused = false; onSecondary && onSecondary(); };
-    overlay.style.display="flex";
-  }
-
-  function closeAnyModal(){
-    if(overlay.style.display === "flex"){
-      overlay.style.display = "none";
-      state.paused = false;
-    }
-  }
+  function addChaosTrad(delta){ state.chaosTrad = clamp(state.chaosTrad + delta, 0, 100); }
+  function addChaosAgi(delta){ state.chaosAgi  = clamp(state.chaosAgi  + delta, 0, 100); }
 
   function randomTaskType(){
-    // Bias: more "OPP/OPEN/ALLO/TIME" to mirror operations flow.
     const pool = ["OPP","OPEN","ALLO","TIME","OPP","ALLO","INV","SLACK","OPEN","TIME"];
     const key = pool[Math.floor(Math.random()*pool.length)];
     return TASK_TYPES.find(t => t.key === key);
@@ -908,10 +1015,8 @@
 
   function makeTask(){
     const t = randomTaskType();
-    const ttl = 18 + Math.floor(Math.random()*10); // 18..27 seconds
+    const ttl = 14 + Math.floor(Math.random()*10); // 14..23
     const id = state.idSeq++;
-    const createdAt = state.timeLeft;
-
     return {
       id,
       key: t.key,
@@ -919,30 +1024,40 @@
       tool: t.tool,
       flavor: t.flavor,
       basePts: t.basePts,
-      ttl,
-      createdAt,
-      handled:false
+      ttl
     };
   }
 
   function deadlineClass(task){
     const remaining = task.ttl;
-    if(remaining <= 6) return "late";
-    if(remaining <= 11) return "soon";
+    if(remaining <= 5) return "late";
+    if(remaining <= 9) return "soon";
     return "";
+  }
+
+  function suggestionText(task){
+    switch(task.key){
+      case "TIME": return "pre-filled from allocations → submit in one go";
+      case "ALLO": return "allocation signal → resolve conflict before it hits";
+      case "OPEN": return "match skills + availability + interest";
+      case "OPP": return "pull skills, CVs, and references into pre-sales";
+      case "INV": return "hours → invoice with fewer surprises";
+      case "SLACK": return "push update to team channel instantly";
+      default: return "connected context available";
+    }
   }
 
   function renderQueues(){
     tradQueueEl.innerHTML = "";
     agiQueueEl.innerHTML = "";
 
-    // Traditional: show all tasks; each needs correct tool selected + click.
     state.queues.trad.forEach(task => {
       const row = document.createElement("div");
       row.className = "task";
 
       const left = document.createElement("div");
       left.className = "left";
+
       const name = document.createElement("div");
       name.className = "name";
       name.textContent = task.name;
@@ -979,8 +1094,6 @@
       tradQueueEl.appendChild(row);
     });
 
-    // Agileday: only available when enabled; tasks can be done with one click.
-    // If not enabled, show a teaser card (but keep area calm).
     if(!state.agiEnabled){
       const teaser = document.createElement("div");
       teaser.className = "task";
@@ -1005,14 +1118,14 @@
 
       const left = document.createElement("div");
       left.className = "left";
+
       const name = document.createElement("div");
       name.className = "name";
       name.textContent = task.name;
 
       const meta = document.createElement("div");
       meta.className = "meta";
-      const suggestion = suggestionText(task);
-      meta.textContent = `Suggested: ${suggestion}`;
+      meta.textContent = `Suggested: ${suggestionText(task)}`;
 
       left.appendChild(name);
       left.appendChild(meta);
@@ -1043,33 +1156,21 @@
     });
   }
 
-  function suggestionText(task){
-    switch(task.key){
-      case "TIME": return "pre-filled from allocations → submit in one go";
-      case "ALLO": return "allocation signal → resolve conflict before it hits";
-      case "OPEN": return "match skills + availability + interest";
-      case "OPP": return "pull skills, CVs, and references into pre-sales";
-      case "INV": return "hours → invoice with fewer surprises";
-      case "SLACK": return "push update to team channel instantly";
-      default: return "connected context available";
-    }
-  }
-
   function spawn(){
     state.wave += 1;
 
-    const newTasks = 1 + (state.wave % 6 === 0 ? 1 : 0); // occasional double
+    const newTasks = 1 + (state.wave % 5 === 0 ? 1 : 0);
     for(let i=0;i<newTasks;i++){
       const task = makeTask();
       state.queues.trad.push(task);
       if(state.agiEnabled){
-        const copy = { ...task, ttl: task.ttl + 4 };
+        const copy = { ...task, ttl: task.ttl + 3 };
         state.queues.agi.push(copy);
       }
     }
 
-    if(state.queues.trad.length > 9) setChaos(4);
-    if(state.agiEnabled && state.queues.agi.length > 8) setChaos(2);
+    if(state.queues.trad.length > 9) addChaosTrad(4);
+    if(state.agiEnabled && state.queues.agi.length > 8) addChaosAgi(2);
 
     renderQueues();
     updateHUD();
@@ -1081,7 +1182,8 @@
       for(let i=q.length-1;i>=0;i--){
         q[i].ttl -= 1;
         if(q[i].ttl <= 0){
-          setChaos(queueName === "trad" ? 6 : 2);
+          if(queueName === "trad") addChaosTrad(6);
+          else addChaosAgi(2);
           q.splice(i,1);
         }
       }
@@ -1092,7 +1194,7 @@
 
   function toolSwitchPenalty(nextTool){
     if(state.lastTool && state.lastTool !== nextTool){
-      setChaos(3);
+      addChaosTrad(3);
     }
     state.lastTool = nextTool;
   }
@@ -1104,7 +1206,7 @@
 
     const task = state.queues.trad[idx];
     if(!state.selectedTool){
-      setChaos(2);
+      addChaosTrad(2);
       toast("Pick a tool first 😅");
       return;
     }
@@ -1112,19 +1214,20 @@
     toolSwitchPenalty(state.selectedTool);
 
     if(state.selectedTool !== task.tool){
-      setChaos(5);
+      addChaosTrad(5);
       toast(`Wrong tool → more copy/paste (${task.tool} needed)`);
       return;
     }
 
-    if(state.queues.trad.length >= 7) setChaos(2);
+    if(state.queues.trad.length >= 7) addChaosTrad(2);
 
-    const pts = Math.max(10, task.basePts - (18 - task.ttl) * 2);
-    state.score += pts;
-    state.done += 1;
+    const pts = Math.max(10, task.basePts - (14 - task.ttl) * 2);
+    state.scoreTrad += pts;
+    state.doneTrad += 1;
+
     state.queues.trad.splice(idx,1);
 
-    setChaos(1);
+    addChaosTrad(1);
 
     renderQueues();
     updateHUD();
@@ -1134,13 +1237,15 @@
     if(!state.running || state.paused || !state.agiEnabled) return;
     const idx = state.queues.agi.findIndex(t => t.id === id);
     if(idx === -1) return;
+
     const task = state.queues.agi[idx];
 
-    setChaos(-3);
+    addChaosAgi(-3);
 
-    const pts = Math.max(20, task.basePts + 15 - (18 - task.ttl));
-    state.score += pts;
-    state.done += 1;
+    const pts = Math.max(20, task.basePts + 15 - (14 - task.ttl));
+    state.scoreAgi += pts;
+    state.doneAgi += 1;
+
     state.queues.agi.splice(idx,1);
 
     renderQueues();
@@ -1153,7 +1258,6 @@
     processTaskAgileday(state.queues.agi[0].id);
   }
 
-  // Tiny toast
   let toastTimer = null;
   function toast(msg){
     const elId = "toastEl";
@@ -1182,38 +1286,71 @@
     el.textContent = msg;
     el.style.display="block";
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => { el.style.display="none"; }, 1400);
+    toastTimer = setTimeout(() => { el.style.display="none"; }, 1200);
   }
 
   function showFlowUnlockedMoment(){
-    // ✅ "win moment" popup + pause
     const text =
       "✅ Agileday is ON — lights on.\n\n" +
       "What just changed:\n" +
       "• One inbox instead of five tools\n" +
       "• Allocations → time entries become effortless\n" +
       "• Hours → invoice blockers drop dramatically\n\n" +
-      "Now clear the queue with 1-click actions and keep Chaos low.";
-    showModal("Flow unlocked", text, "Back to the queue", "Got it", () => {}, () => {}, false);
+      "Now clear the queue with 1-click actions and keep AGI Chaos low.";
+    showModal("Flow unlocked", text, "Back to the queue", "Got it", () => {}, () => {}, false, false, null);
   }
 
   function enableAgileday(){
     if(!canSwitchNow()) return;
     state.agiEnabled = true;
-    state.mode = "AGI";
-    setChaos(-10);
 
-    // Theme swap will happen in updateHUD
+    addChaosAgi(-8);
+
     toast("Agileday ON ✅ Unified flow unlocked");
 
-    const snapshot = state.queues.trad.slice(0, 6).map(t => ({...t, ttl: t.ttl + 6}));
+    const snapshot = state.queues.trad.slice(0, 6).map(t => ({...t, ttl: t.ttl + 5}));
     state.queues.agi = state.queues.agi.concat(snapshot);
 
     renderQueues();
     updateHUD();
-
-    // ✅ show the “win moment”
     showFlowUnlockedMoment();
+  }
+
+  // ✅ ROI-ish helper: turns deltas into a single punchy line
+  function buildRoiHtml(){
+    const tradChaos = Math.round(clamp(state.chaosTrad, 0, 100));
+    const agiChaos  = Math.round(clamp(state.chaosAgi, 0, 100));
+
+    const chaosSaved = clamp(tradChaos - agiChaos, -100, 100);
+    const scoreLift  = state.scoreAgi - state.scoreTrad;
+    const doneLift   = state.doneAgi - state.doneTrad;
+
+    // Rough conversion: 10 chaos points ~ 1 hour/week of admin drag (game metaphor)
+    const hoursSaved = clamp(Math.round((Math.max(0, chaosSaved) / 10) * 1), 0, 12);
+
+    const chaosTxt = chaosSaved >= 0 ? `-${chaosSaved}% Chaos` : `+${Math.abs(chaosSaved)}% Chaos`;
+    const scoreTxt = scoreLift >= 0 ? `+${scoreLift} pts` : `-${Math.abs(scoreLift)} pts`;
+    const doneTxt  = doneLift >= 0 ? `+${doneLift} done` : `-${Math.abs(doneLift)} done`;
+
+    const headline = (state.agiEnabled && chaosSaved > 0)
+      ? `Agileday advantage: <b>${chaosTxt}</b>`
+      : `Agileday advantage: <b>${chaosTxt}</b>`;
+
+    const sub = (state.agiEnabled && chaosSaved > 0 && hoursSaved > 0)
+      ? `<span class="muted">That’s like ~</span><b>${hoursSaved}h/week</b><span class="muted"> less admin drag.</span>`
+      : `<span class="muted">Switch earlier and keep flow to reduce chaos.</span>`;
+
+    return `
+      <div class="roiPill">
+        <span>${headline}</span>
+        <span class="muted">•</span>
+        <span>${scoreTxt}</span>
+        <span class="muted">•</span>
+        <span>${doneTxt}</span>
+        <span class="muted">•</span>
+        <span>${sub}</span>
+      </div>
+    `;
   }
 
   function endGame(){
@@ -1225,48 +1362,54 @@
     state.spawnHandle = null;
     switchBtn.disabled = true;
 
-    const chaos = Math.round(state.chaos);
-    const done = state.done;
-    const score = state.score;
+    const tradChaos = Math.round(state.chaosTrad);
+    const agiChaos = Math.round(state.chaosAgi);
 
-    const lostHours = clamp(Math.round(6 + chaos/7), 4, 24);
-    const savedHours = state.agiEnabled ? clamp(Math.round(10 + (100-chaos)/8), 6, 22) : clamp(Math.round(4 + (100-chaos)/14), 2, 12);
+    const text =
+      `Traditional track:\n` +
+      `• Score: ${state.scoreTrad}  • Done: ${state.doneTrad}  • Chaos: ${tradChaos}%\n\n` +
+      `Agileday track:\n` +
+      `• Score: ${state.scoreAgi}  • Done: ${state.doneAgi}  • Chaos: ${agiChaos}%\n\n` +
+      (state.agiEnabled
+        ? `Result: You experienced the switch. Now do it in real life — connect CRM, projects, staffing, time and invoicing.`
+        : `Result: You stayed in tool chaos. Want the shortcut? Switch on the operating platform that connects it all.`);
 
-    const verdict = (state.agiEnabled && chaos < 55) ? "You reached flow." :
-                    (state.agiEnabled) ? "You improved, but ops is still noisy." :
-                    "Classic tool chaos. You felt it.";
-
-    const ctaLine = state.agiEnabled
-      ? "Now imagine this with your real CRM, projects, staffing, time and invoicing — connected."
-      : "Want the shortcut? Turn on the operating platform that connects it all.";
+    const roiHtml = buildRoiHtml();
 
     showModal(
       "Game Over — Ops Reality Check",
-      `${verdict} You handled ${done} items and scored ${score}. Chaos ended at ${chaos}%. Estimated admin drag: ~${lostHours} hours/week. With connected flow, you can save ~${savedHours} hours/week.\n\n${ctaLine}`,
+      text,
       "Book a demo",
       "Play again",
-      () => {
-        // Your CTA (as you requested)
-        window.location.href = "https://www.agileday.com/free-trial";
-      },
+      () => { window.location.href = "https://www.agileday.com/free-trial"; },
       () => reset(true),
-      true
+      false,
+      true,
+      roiHtml
     );
+
     updateHUD();
   }
 
   function reset(keepModalClosed=false){
     state.running=false;
     state.paused=false;
-    state.mode="TRAD";
+
     state.selectedTool=null;
-    state.timeLeft=120;
-    state.score=0;
-    state.done=0;
+    state.timeLeft=GAME_SECONDS;
     state.wave=0;
-    state.chaos=0;
+
+    state.scoreTrad=0;
+    state.doneTrad=0;
+    state.chaosTrad=0;
+
+    state.scoreAgi=0;
+    state.doneAgi=0;
+    state.chaosAgi=0;
+
     state.switchUnlocked=false;
     state.agiEnabled=false;
+
     state.lastTool=null;
     state.queues.trad=[];
     state.queues.agi=[];
@@ -1277,13 +1420,11 @@
     state.tickHandle=null;
     state.spawnHandle=null;
 
-    // ✅ Start button must be re-enabled after restart
     startBtn.disabled = false;
 
     setSelectedTool(null);
     toolEls.forEach(el => el.classList.remove("active"));
 
-    // ensure switch button looks locked again
     switchBtn.classList.add("secondary");
     switchBtn.classList.remove("good");
 
@@ -1292,13 +1433,15 @@
 
     if(!keepModalClosed){
       showModal(
-        "Ops Rush — 2 minutes",
-        "You’ll experience two realities:\n\n• Traditional ops: switching tools + manual updates → Chaos\n• Agileday flow: connected data + smart suggestions → Flow\n\nGoal: keep Chaos low and clear the queue before time runs out.",
+        "Ops Rush — 1 minute",
+        "You’ll experience two realities:\n\n• Traditional ops: switching tools + manual updates → Chaos\n• Agileday flow: connected data + smart suggestions → Flow\n\nGoal: keep chaos low and clear as many tasks as possible.\n\nTip: Agileday unlocks at 00:35.",
         "Start",
         "Close",
         () => start(),
         () => {},
-        true
+        true,
+        false,
+        null
       );
     }
   }
@@ -1310,36 +1453,36 @@
 
     switchBtn.disabled = true;
 
-    let spawnMs = 1600;
+    let spawnMs = 1200;
 
     spawn(); spawn();
 
     state.spawnHandle = setInterval(() => {
-      if(!state.running) return;
-      if(state.paused) return;
+      if(!state.running || state.paused) return;
       spawn();
-      spawnMs = Math.max(900, spawnMs - 15);
+      spawnMs = Math.max(750, spawnMs - 18);
       clearInterval(state.spawnHandle);
       state.spawnHandle = setInterval(() => {
-        if(!state.running) return;
-        if(state.paused) return;
+        if(!state.running || state.paused) return;
         spawn();
       }, spawnMs);
     }, spawnMs);
 
     state.tickHandle = setInterval(() => {
-      if(!state.running) return;
-      if(state.paused) return;
+      if(!state.running || state.paused) return;
 
       state.timeLeft -= 1;
       decayDeadlines();
 
-      if(!state.agiEnabled) setChaos(0.6);
-      else setChaos(-0.25);
-
-      if(state.chaos >= 95){
-        state.score = Math.max(0, state.score - 8);
+      if(!state.agiEnabled){
+        addChaosTrad(0.85);
+      }else{
+        addChaosAgi(-0.35);
+        addChaosTrad(0.15);
       }
+
+      if(state.chaosTrad >= 95) state.scoreTrad = Math.max(0, state.scoreTrad - 6);
+      if(state.chaosAgi  >= 95) state.scoreAgi  = Math.max(0, state.scoreAgi  - 3);
 
       if(state.timeLeft <= 0){
         state.timeLeft = 0;
@@ -1349,9 +1492,6 @@
         return;
       }
 
-      if(state.queues.trad.length === 0) setChaos(-1);
-      if(state.agiEnabled && state.queues.agi.length === 0) setChaos(-1);
-
       updateHUD();
       renderQueues();
     }, 1000);
@@ -1359,35 +1499,33 @@
     updateHUD();
   }
 
-  // ---------- Events ----------
   startBtn.addEventListener("click", () => start());
   restartBtn.addEventListener("click", () => reset(true));
 
   howBtn.addEventListener("click", () => {
     showModal(
       "How to play",
-      "Traditional Ops: choose a tool, then process tasks. Switching tools adds Chaos.\n\nAgileday Flow: unlock at 01:10 and switch on Agileday. Then tasks can be handled in one click with suggestions.\n\nWin condition: keep Chaos low and clear as many tasks as possible.",
+      "Traditional Ops: choose a tool, then process tasks. Switching tools adds Trad Chaos.\n\nAgileday Flow: unlock at 00:35 and switch on Agileday. Then tasks can be handled in one click with suggestions.\n\nYou’ll see separate Score + Chaos for both tracks.\n\nGame length: 1 minute.",
       "Start",
       "Close",
       () => start(),
       () => {},
-      true
+      true,
+      false,
+      null
     );
   });
 
   closeModal.addEventListener("click", () => closeAnyModal());
-
   switchBtn.addEventListener("click", () => enableAgileday());
 
   toolEls.forEach(el => {
     el.addEventListener("click", () => {
       if(!state.running || state.paused) return;
-      const tool = el.dataset.tool;
-      setSelectedTool(tool);
+      setSelectedTool(el.dataset.tool);
     });
   });
 
-  // Keyboard shortcuts
   window.addEventListener("keydown", (e) => {
     if(e.key === "Escape") closeAnyModal();
     if(!state.running || state.paused) return;
@@ -1408,7 +1546,7 @@
     }
   });
 
-  // Initial modal
+  // Init
   reset();
   updateHUD();
 })();
